@@ -100,3 +100,4 @@ if __name__ == "__main__":
     print("Yearly Summary:")
     for y in res["yearly_summary"]:
         print(f"  Year {y['Order Year']}: Revenue=${y['revenue']:,} (+{y['revenue_yoy_growth']}%), Margin={y['profit_margin_pct']}%")
+

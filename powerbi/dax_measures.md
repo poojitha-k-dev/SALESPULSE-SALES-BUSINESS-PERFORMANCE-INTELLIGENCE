@@ -162,3 +162,4 @@ ADDCOLUMNS(
     "Day of Week Number", WEEKDAY([Date], 2)
 )
 ```
+

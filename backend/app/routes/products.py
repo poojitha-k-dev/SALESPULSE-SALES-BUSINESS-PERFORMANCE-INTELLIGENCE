@@ -19,3 +19,4 @@ def get_products_endpoint(
     top profit products, loss-making products, and high-revenue low-margin traps.
     """
     return AnalyticsService.get_product_analytics(limit=limit)
+

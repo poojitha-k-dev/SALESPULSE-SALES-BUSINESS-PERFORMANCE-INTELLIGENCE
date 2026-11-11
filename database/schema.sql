@@ -150,3 +150,4 @@ CREATE TABLE agg_regional_performance (
     profit_margin_pct NUMERIC(6, 2) NOT NULL,
     PRIMARY KEY (region, state)
 );
+

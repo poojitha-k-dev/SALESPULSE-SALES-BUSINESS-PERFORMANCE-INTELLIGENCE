@@ -99,3 +99,4 @@ if __name__ == "__main__":
     print(f"Total Loss Making SKUs: {res['total_loss_making_products_count']}")
     print("Top Revenue Product:", res['top_revenue_products'][0]['Product Name'], f"${res['top_revenue_products'][0]['revenue']:,}")
     print("Worst Loss SKU:", res['loss_making_products'][0]['Product Name'], f"${res['loss_making_products'][0]['profit']:,}")
+

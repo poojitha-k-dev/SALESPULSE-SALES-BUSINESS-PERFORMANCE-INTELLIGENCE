@@ -108,3 +108,4 @@ def test_explorer_endpoints():
     data = res_prev.json()
     assert data["total_records"] == 9994
     assert len(data["rows"]) == 10
+

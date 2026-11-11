@@ -36,3 +36,4 @@ FROM GENERATE_SERIES('2014-01-01'::DATE, '2018-12-31'::DATE, '1 day'::INTERVAL) 
 
 CREATE INDEX idx_dim_date_year_month ON dim_date(year_month);
 CREATE INDEX idx_dim_date_year ON dim_date(year);
+

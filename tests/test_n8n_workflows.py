@@ -56,3 +56,4 @@ def test_workflow_3_endpoint_contract():
     assert res_overview.status_code == 200
     assert res_insights.status_code == 200
     assert len(res_insights.json()) >= 7
+

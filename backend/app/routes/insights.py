@@ -16,3 +16,4 @@ def get_strategic_insights_endpoint():
     Retrieve empirical, evidence-based business insights and prioritized strategic directives.
     """
     return AnalyticsService.get_strategic_insights()
+

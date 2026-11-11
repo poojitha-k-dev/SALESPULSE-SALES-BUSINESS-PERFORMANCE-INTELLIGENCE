@@ -193,3 +193,4 @@ def generate_business_insights(df: pd.DataFrame = None) -> list:
 
 if __name__ == "__main__":
     generate_business_insights()
+

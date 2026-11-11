@@ -79,3 +79,4 @@ SalesPulse features three production-grade n8n automated workflows orchestrating
 3. Select `sales_pipeline.json`, `sales_monitoring.json`, or `business_reporting.json`.
 4. Configure your Slack / SMTP credentials or webhook URLs in the credentials vault.
 5. Click **Activate Workflow**.
+

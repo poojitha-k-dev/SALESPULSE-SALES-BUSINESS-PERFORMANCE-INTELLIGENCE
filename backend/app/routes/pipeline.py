@@ -31,3 +31,4 @@ def get_data_quality_endpoint():
     Retrieve current data validation results and quality score.
     """
     return PipelineService.get_data_quality_report()
+

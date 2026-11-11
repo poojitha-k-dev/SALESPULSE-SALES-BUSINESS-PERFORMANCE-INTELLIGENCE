@@ -98,3 +98,4 @@ if __name__ == "__main__":
     for s in res["segment_summary"]:
         print(f"  {s['Segment']}: Revenue=${s['revenue']:,} ({s['revenue_share_pct']}%), Margin={s['profit_margin_pct']}%, Orders/Cust={s['orders_per_customer']}")
     print(f"Pareto Principle: {res['pareto_metrics']['pct_customers_for_80_pct_revenue']}% of customers drive 80% of revenue ({res['pareto_metrics']['customers_for_80_pct_revenue']} customers).")
+

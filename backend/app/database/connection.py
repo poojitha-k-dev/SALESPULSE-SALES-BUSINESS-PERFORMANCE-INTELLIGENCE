@@ -49,3 +49,4 @@ def get_raw_connection():
         password=DB_PASSWORD,
         cursor_factory=RealDictCursor
     )
+

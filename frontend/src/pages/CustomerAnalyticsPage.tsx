@@ -204,3 +204,4 @@ export const CustomerAnalyticsPage: React.FC = () => {
     </div>
   );
 };
+

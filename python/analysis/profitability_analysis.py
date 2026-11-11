@@ -107,3 +107,4 @@ if __name__ == "__main__":
     print("\nDiscount Tiers:")
     for d in res["discount_tiers"]:
         print(f"  {d['Discount Tier']}: Rev=${d['revenue']:,}, Profit=${d['profit']:,}, Margin={d['profit_margin_pct']}%, Loss Rate={d['loss_rate_pct']}%")
+

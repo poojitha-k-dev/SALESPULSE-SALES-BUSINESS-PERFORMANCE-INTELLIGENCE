@@ -53,3 +53,4 @@
 - `dim_customers`: Keyed by `customer_id`, storing `customer_name`, `segment`.
 - `dim_geography`: Normalized geographic entity keyed by `geography_id` (`city`, `state`, `postal_code`, `region`, `country`).
 - `fact_sales`: Transactional fact table keyed by `row_id` referencing dimension foreign keys.
+

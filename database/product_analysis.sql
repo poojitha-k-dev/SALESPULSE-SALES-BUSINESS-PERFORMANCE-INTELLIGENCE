@@ -99,3 +99,4 @@ FROM product_stats
 WHERE sales_quintile = 1 AND margin_pct < 5.0
 ORDER BY profit ASC
 LIMIT 15;
+

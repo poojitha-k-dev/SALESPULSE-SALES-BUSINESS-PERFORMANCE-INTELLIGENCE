@@ -87,3 +87,4 @@ export async function fetchTablePreview(table: string, page: number = 1, pageSiz
   if (!res.ok) throw new Error('Failed to preview table data');
   return res.json();
 }
+

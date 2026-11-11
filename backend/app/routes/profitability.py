@@ -16,3 +16,4 @@ def get_profitability_endpoint():
     loss subcategories, and correlation analysis.
     """
     return AnalyticsService.get_profitability_analytics()
+

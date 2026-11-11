@@ -61,3 +61,4 @@ JOIN dim_geography g ON f.geography_id = g.geography_id
 GROUP BY g.city, g.state, g.region
 ORDER BY total_profit DESC
 LIMIT 10;
+

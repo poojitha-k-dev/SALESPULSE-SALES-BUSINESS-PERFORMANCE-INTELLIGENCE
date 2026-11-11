@@ -92,3 +92,4 @@ if __name__ == "__main__":
     print(f"Loss making states count: {len(res['loss_making_states'])}")
     for s in res['loss_making_states'][:3]:
         print(f"  {s['State']} ({s['Region']}): Profit=${s['profit']:,}, Discount={s['avg_discount_pct']}%")
+

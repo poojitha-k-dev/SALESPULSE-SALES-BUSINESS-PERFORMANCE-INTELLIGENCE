@@ -253,3 +253,4 @@ class AnalyticsService:
     def get_strategic_insights(cls) -> List[Dict[str, Any]]:
         from python.insights.generate_insights import generate_business_insights
         return generate_business_insights()
+

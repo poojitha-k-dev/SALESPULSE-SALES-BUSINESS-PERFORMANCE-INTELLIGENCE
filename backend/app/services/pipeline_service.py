@@ -88,3 +88,4 @@ class PipelineService:
             with open(QUALITY_FILE, "r") as f:
                 return json.load(f)
         return validate_dataset()
+

@@ -136,3 +136,4 @@ FROM fact_sales f
 JOIN dim_geography g ON f.geography_id = g.geography_id
 GROUP BY g.region, g.state
 ORDER BY g.region, total_revenue DESC;
+

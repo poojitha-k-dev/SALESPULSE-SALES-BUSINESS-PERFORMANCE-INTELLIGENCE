@@ -21,3 +21,4 @@ def get_sales_trends_endpoint(
     day-of-week seasonality, and month seasonality metrics.
     """
     return AnalyticsService.get_sales_analytics(year=year, region=region, category=category)
+

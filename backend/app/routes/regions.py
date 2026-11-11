@@ -16,3 +16,4 @@ def get_regions_endpoint():
     loss-making states, and top cities.
     """
     return AnalyticsService.get_regional_analytics()
+

@@ -122,3 +122,4 @@ Safely previews paginated data from any of the allowed analytical tables.
 
 ### `GET /api/data/explorer/export`
 Streams a downloadable CSV export of the requested table.
+

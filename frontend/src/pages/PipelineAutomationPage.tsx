@@ -241,3 +241,4 @@ export const PipelineAutomationPage: React.FC = () => {
     </div>
   );
 };
+

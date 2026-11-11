@@ -90,3 +90,4 @@ SELECT
 FROM fact_sales
 GROUP BY ship_mode
 ORDER BY total_sales DESC;
+

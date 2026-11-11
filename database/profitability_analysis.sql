@@ -66,3 +66,4 @@ GROUP BY c.customer_id, c.customer_name, c.segment
 HAVING SUM(f.profit) < 0
 ORDER BY cumulative_loss ASC
 LIMIT 10;
+

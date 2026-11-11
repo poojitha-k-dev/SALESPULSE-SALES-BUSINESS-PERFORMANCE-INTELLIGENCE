@@ -16,3 +16,4 @@ def get_customers_endpoint():
     loss-generating clients, Pareto 80/20 distribution, and purchase frequencies.
     """
     return AnalyticsService.get_customer_analytics()
+

@@ -114,3 +114,4 @@ This guide details the end-to-end visual architecture, color palette, visual com
   - Top Customers by Net Profit Contribution.
 - **Visual 4 (Histogram / Column Chart)**:
   - Customer Order Frequency Distribution (1 order, 2-3 orders, 4-6 orders, 7+ orders).
+
