@@ -120,3 +120,4 @@ def generate_portfolio_visuals():
 
 if __name__ == '__main__':
     generate_portfolio_visuals()
+
