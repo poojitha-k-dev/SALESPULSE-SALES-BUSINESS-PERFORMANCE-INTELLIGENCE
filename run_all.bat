@@ -10,3 +10,4 @@ echo Both services launched in separate windows!
 echo Backend:  http://127.0.0.1:8000/docs
 echo Frontend: http://localhost:5173
 pause
+
