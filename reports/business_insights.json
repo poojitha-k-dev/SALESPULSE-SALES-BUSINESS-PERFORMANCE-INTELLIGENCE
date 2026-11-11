@@ -1,0 +1,65 @@
+[
+  {
+    "id": "INSIGHT-001",
+    "title": "Category Margin Disparity: Technology Leads Profitability while Furniture Margin Lags",
+    "metric": "Technology generated $836,154.02 with a 17.4% margin, whereas Furniture generated $741,999.73 at only a 2.49% margin.",
+    "implication": "While Furniture accounts for substantial transaction volume and working capital, its low net margin (2.49%) creates a structural drag on corporate earnings, largely driven by Tables (-$17,725 loss).",
+    "action": "Enforce strict margin floors on Furniture subcategories (especially Tables and Bookcases) and bundle low-margin furniture with high-margin Technology accessories.",
+    "priority": "HIGH",
+    "category": "Product & Category Management"
+  },
+  {
+    "id": "INSIGHT-002",
+    "title": "Sub-Category Loss Driver: Tables Operating at Chronic Net Loss",
+    "metric": "Tables generated $206,965.53 in sales but accumulated -$17,725.57 in losses, with an average discount rate of 26.13%.",
+    "implication": "Uncontrolled discounting and high freight costs for bulky table items have eroded gross margins entirely, resulting in net negative unit economics.",
+    "action": "Cap maximum promotional discounts on Tables at 10%, review freight carrier surcharges for oversize shipments, and re-negotiate vendor cost of goods.",
+    "priority": "CRITICAL",
+    "category": "Profitability & Pricing"
+  },
+  {
+    "id": "INSIGHT-003",
+    "title": "Severe Margin Erosion from Deep Discounting (>20% Discount Threshold)",
+    "metric": "Orders with >20% discounts produced $362,770.07 in sales but net losses of -$135,376.28 (margin: -37.32%), compared to +29.50% margin for undiscounted sales.",
+    "implication": "Sales teams utilize deep discounts as a volume tool without realizing that discounts exceeding 20% mathematically eliminate profitability for 82% of catalog items.",
+    "action": "Implement automated CPQ approval gates: require Regional Director authorization for discounts above 20% and ban discounts above 40% entirely.",
+    "priority": "CRITICAL",
+    "category": "Pricing Strategy"
+  },
+  {
+    "id": "INSIGHT-004",
+    "title": "Regional Operating Inefficiency: Central Margin Lags Behind West",
+    "metric": "Central region delivered a profit margin of only 7.92%, whereas West achieved 14.94% ($108,418.31 profit).",
+    "implication": "Underperformance in states like Texas (-$25,729 loss) and Illinois (-$12,607 loss) in the Central region severely depresses overall regional margins.",
+    "action": "Conduct immediate state-level commercial audits in Texas and Illinois to terminate loss-leading promotions and restructure distributor pricing agreements.",
+    "priority": "HIGH",
+    "category": "Regional Expansion & Operations"
+  },
+  {
+    "id": "INSIGHT-005",
+    "title": "High-Volume Loss SKU: 'Cubify CubeX 3D Printer Double Head Print...'",
+    "metric": "Generated $11,099.95 in top-line revenue but created -$8,879.97 in net cumulative loss (average discount: 53.33%).",
+    "implication": "A handful of marquee hardware products are being subsidized excessively through standard partner discounts, creating significant balance sheet leaks.",
+    "action": "Freeze price concessions on this SKU, establish minimum advertised price (MAP) policies, and replace discounted unit volume with warranty and service attach rates.",
+    "priority": "HIGH",
+    "category": "Product Merchandising"
+  },
+  {
+    "id": "INSIGHT-006",
+    "title": "Segment Pillar: Consumer Segment Accounts for 50%+ of Enterprise Revenue",
+    "metric": "Consumer segment accounts for $1,161,401.12 (50.6% of total revenue) with an Average Order Value of $449.11 and 11.55% margin.",
+    "implication": "Consumer segment demonstrates steady purchasing cadence, while Corporate and Home Office segments show higher AOV ($470+) and lower discount sensitivity.",
+    "action": "Expand B2B enterprise procurement portals for Corporate and Home Office accounts to cross-sell office suite packages with higher retained margin.",
+    "priority": "MEDIUM",
+    "category": "Customer Strategy"
+  },
+  {
+    "id": "INSIGHT-007",
+    "title": "Pronounced Q4 Revenue Seasonality (+70% vs Q1 Lows)",
+    "metric": "Q4 revenue reaches $878,077.50 compared to $359,681.61 in Q1 (144.1% surge), driven by year-end corporate budget utilization and holiday demand.",
+    "implication": "Fulfillment bottlenecks, stockouts, and shipping delays in November and December risk customer dissatisfaction, while Q1 experiences excess capacity.",
+    "action": "Align supply chain purchasing 90 days earlier (August/September) to buffer inventory and introduce early-bird incentive programs in Q1 to balance annual cash flow.",
+    "priority": "MEDIUM",
+    "category": "Supply Chain & Seasonality"
+  }
+]

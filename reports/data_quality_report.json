@@ -1,0 +1,71 @@
+{
+  "dataset_name": "Sample Superstore Cleaned Dataset",
+  "file_path": "C:\\Users\\poojitha\\Desktop\\SALESPULSE \u2013 SALES & BUSINESS PERFORMANCE INTELLIGENCE\\Sales-Business-Performance-Intelligence\\data\\processed\\clean_superstore.csv",
+  "total_records": 9994,
+  "total_columns": 33,
+  "checks_executed": 10,
+  "checks_passed": 10,
+  "checks_failed": 0,
+  "quality_score_pct": 100.0,
+  "passed_rules": [
+    {
+      "rule": "Expected Row Count",
+      "status": "PASSED",
+      "details": "Row count is 9,994 (Expected 9,994)"
+    },
+    {
+      "rule": "Primary Key Uniqueness (Row ID)",
+      "status": "PASSED",
+      "details": "Unique Row IDs: 9,994 / 9,994"
+    },
+    {
+      "rule": "Zero Missing Values",
+      "status": "PASSED",
+      "details": "Total nulls found: 0"
+    },
+    {
+      "rule": "Positive Sales Values",
+      "status": "PASSED",
+      "details": "Min sales: $0.44, Max sales: $22638.48"
+    },
+    {
+      "rule": "Quantity Valid Range (1 to 100)",
+      "status": "PASSED",
+      "details": "Min quantity: 1, Max quantity: 14"
+    },
+    {
+      "rule": "Discount Valid Range (0.0 to 1.0)",
+      "status": "PASSED",
+      "details": "Min discount: 0.00, Max discount: 0.80"
+    },
+    {
+      "rule": "Chronological Shipping Validity (Ship Date >= Order Date)",
+      "status": "PASSED",
+      "details": "Max shipping days: 7 days, Min: 0 days"
+    },
+    {
+      "rule": "Standardized Product Categories",
+      "status": "PASSED",
+      "details": "Categories: ['Furniture', 'Office Supplies', 'Technology']"
+    },
+    {
+      "rule": "Standardized Sales Regions",
+      "status": "PASSED",
+      "details": "Regions: ['Central', 'East', 'South', 'West']"
+    },
+    {
+      "rule": "Financial Balance Equation (Cost + Profit == Sales)",
+      "status": "PASSED",
+      "details": "Verified across 9,994 line items"
+    }
+  ],
+  "failed_rules": [],
+  "summary_statistics": {
+    "total_sales": 2297200.65,
+    "total_profit": 286396.54000000004,
+    "overall_profit_margin_pct": 12.47,
+    "total_orders": 5009,
+    "total_customers": 793,
+    "loss_making_rows": 1871
+  }
+}

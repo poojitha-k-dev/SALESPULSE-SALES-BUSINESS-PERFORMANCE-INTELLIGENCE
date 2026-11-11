@@ -1,0 +1,118 @@
+{
+  "name": "SalesPulse - Sales Performance & KPI Monitoring",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "name": "Schedule Trigger (Every 6 Hours)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/api/overview",
+        "options": {}
+      },
+      "id": "b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e",
+      "name": "Fetch Overview KPIs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.kpis.profit_margin_pct }}",
+              "operation": "smaller",
+              "value2": 10.0
+            }
+          ]
+        }
+      },
+      "id": "c3d4e5f6-a7b8-4c5d-0e1f-2a3b4c5d6e7f",
+      "name": "Margin Threshold < 10%?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#executive-sales-alerts",
+        "text": "=⚠️ [SalesPulse Margin Compression Warning]\n• Timestamp: {{ $now.toISO() }}\n• Current Profit Margin: {{ $('Fetch Overview KPIs').item.json.kpis.profit_margin_pct }}% (Below 10% Floor)\n• Realized Profit: ${{ $('Fetch Overview KPIs').item.json.kpis.total_profit.toLocaleString() }}\n• Cumulative Unprofitable Orders: {{ $('Fetch Overview KPIs').item.json.kpis.loss_orders }}\n• Action Required: Review discounting policies immediately."
+      },
+      "id": "d4e5f6a7-b8c9-4d5e-1f2a-3b4c5d6e7f80",
+      "name": "Trigger Margin Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [920, 200]
+    },
+    {
+      "parameters": {
+        "channel": "#sales-telemetry",
+        "text": "=📊 [SalesPulse KPI Check Nominal]\n• Timestamp: {{ $now.toISO() }}\n• Margin: {{ $('Fetch Overview KPIs').item.json.kpis.profit_margin_pct }}%\n• Revenue: ${{ $('Fetch Overview KPIs').item.json.kpis.total_revenue.toLocaleString() }}\n• Orders: {{ $('Fetch Overview KPIs').item.json.kpis.total_orders.toLocaleString() }}"
+      },
+      "id": "e5f6a7b8-c9d0-4e5f-2a3b-4c5d6e7f8091",
+      "name": "Log Nominal KPI Status",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [920, 420]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Every 6 Hours)": {
+      "main": [
+        [
+          {
+            "node": "Fetch Overview KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Overview KPIs": {
+      "main": [
+        [
+          {
+            "node": "Margin Threshold < 10%?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Margin Threshold < 10%?": {
+      "main": [
+        [
+          {
+            "node": "Trigger Margin Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Nominal KPI Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

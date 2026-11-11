@@ -1,0 +1,163 @@
+{
+  "name": "SalesPulse - Automated Sales Data Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "1a082b2f-3788-4f2b-8a8b-3d07e60b1e10",
+      "name": "Schedule Trigger (Daily 02:00 UTC)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/health",
+        "options": {}
+      },
+      "id": "2b193c30-4899-4a3c-9b9c-4e18f71c2f21",
+      "name": "Health Check FastAPI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/api/pipeline/run",
+        "options": {}
+      },
+      "id": "3c204d41-5900-5b4d-ac0d-5f29a82d3a32",
+      "name": "Trigger Pipeline ETL Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/api/data/quality",
+        "options": {}
+      },
+      "id": "4d315e52-6011-6c5e-bd1e-6a30b93e4b43",
+      "name": "Validate Quality Report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.quality_score_pct }}",
+              "operation": "equal",
+              "value2": 100
+            }
+          ]
+        }
+      },
+      "id": "5e426f63-7122-7d6f-ce2f-7b41ca4f5c54",
+      "name": "Check 100% Quality Score",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#sales-pipeline-alerts",
+        "text": "=✅ [SalesPulse Pipeline Success]\n• Execution Timestamp: {{ $now.toISO() }}\n• Records Processed: {{ $('Trigger Pipeline ETL Run').item.json.records_processed }}\n• Quality Score: {{ $json.quality_score_pct }}%\n• Checks Passed: {{ $json.checks_passed }}/{{ $json.checks_executed }}\n• Database Status: Synchronized (9,994 Fact Rows)"
+      },
+      "id": "6f537a74-8233-8e70-df30-8c52db5a6d65",
+      "name": "Send Success Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [1360, 200]
+    },
+    {
+      "parameters": {
+        "channel": "#sales-pipeline-alerts",
+        "text": "=🚨 [SalesPulse Pipeline Failure Alert]\n• Execution Timestamp: {{ $now.toISO() }}\n• Failed Quality Score: {{ $json.quality_score_pct }}%\n• Checks Failed: {{ $json.checks_failed }}\n• Details: Investigate data/processed/clean_superstore.csv immediately."
+      },
+      "id": "7a648b85-9344-9f81-e041-9d63ec6b7e76",
+      "name": "Send Failure Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [1360, 420]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (Daily 02:00 UTC)": {
+      "main": [
+        [
+          {
+            "node": "Health Check FastAPI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Health Check FastAPI": {
+      "main": [
+        [
+          {
+            "node": "Trigger Pipeline ETL Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Pipeline ETL Run": {
+      "main": [
+        [
+          {
+            "node": "Validate Quality Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Quality Report": {
+      "main": [
+        [
+          {
+            "node": "Check 100% Quality Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check 100% Quality Score": {
+      "main": [
+        [
+          {
+            "node": "Send Success Notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Failure Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

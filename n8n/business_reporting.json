@@ -1,0 +1,121 @@
+{
+  "name": "SalesPulse - Automated Business Reporting",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "11111111-2222-3333-4444-555555555555",
+      "name": "Schedule (Weekly Monday 09:00 UTC)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/api/overview",
+        "options": {}
+      },
+      "id": "22222222-3333-4444-5555-666666666666",
+      "name": "Fetch Executive Summary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 220]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/api/insights",
+        "options": {}
+      },
+      "id": "33333333-4444-5555-6666-777777777777",
+      "name": "Fetch Active Directives",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const overview = $('Fetch Executive Summary').item.json;\nconst insights = $('Fetch Active Directives').all().map(i => i.json);\n\nlet htmlReport = `\n<h2>SalesPulse Weekly Executive Business Intelligence Briefing</h2>\n<p><strong>Generated:</strong> ${new Date().toUTCString()}</p>\n<hr/>\n<h3>1. Financial Performance Snapshot</h3>\n<ul>\n  <li><strong>Total Gross Revenue:</strong> $${Number(overview.kpis.total_revenue).toLocaleString()}</li>\n  <li><strong>Total Net Profit:</strong> $${Number(overview.kpis.total_profit).toLocaleString()}</li>\n  <li><strong>Blended Profit Margin:</strong> ${overview.kpis.profit_margin_pct.toFixed(2)}%</li>\n  <li><strong>Total Orders:</strong> ${overview.kpis.total_orders.toLocaleString()}</li>\n  <li><strong>Average Order Value:</strong> $${overview.kpis.average_order_value.toFixed(2)}</li>\n</ul>\n\n<h3>2. Top Prioritized Strategic Directives</h3>\n<ol>\n`;\n\ninsights.slice(0, 3).forEach(ins => {\n  htmlReport += `\n    <li>\n      <strong>[${ins.priority}] ${ins.title}</strong><br/>\n      <em>Metric:</em> ${ins.metric}<br/>\n      <em>Directive:</em> ${ins.action}\n    </li>\n  `;\n});\n\nhtmlReport += `</ol><hr/><p><em>SalesPulse Enterprise Intelligence Platform</em></p>`;\n\nreturn { htmlReport, total_revenue: overview.kpis.total_revenue };"
+      },
+      "id": "44444444-5555-6666-7777-888888888888",
+      "name": "Format Executive HTML Digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "reports@salespulse.analytics",
+        "toEmail": "executive-leadership@salespulse.analytics",
+        "subject": "=SalesPulse Weekly Executive Performance Digest - {{ $now.toFormat('yyyy-MM-dd') }}",
+        "html": "={{ $json.htmlReport }}"
+      },
+      "id": "55555555-6666-7777-8888-999999999999",
+      "name": "Send Email to Management",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 300]
+    }
+  ],
+  "connections": {
+    "Schedule (Weekly Monday 09:00 UTC)": {
+      "main": [
+        [
+          {
+            "node": "Fetch Executive Summary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Active Directives",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Executive Summary": {
+      "main": [
+        [
+          {
+            "node": "Format Executive HTML Digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Active Directives": {
+      "main": [
+        [
+          {
+            "node": "Format Executive HTML Digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Executive HTML Digest": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Management",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
